@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "DryIoc.dll/5.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/DryIoc.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/DryIoc.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -1539,6 +1548,30 @@
     }
   },
   "libraries": {
+    "DryIoc.dll/5.4.1": {
+      "sha512": "fWjM3O4tCivhoQiHsJ3XClLtQ8wK2Tg6Loy6bQ7nOO1L5nRngB4G8TjtLJT3JuvnVQ7DC+kD4nDIVR/qjQg/dw==",
+      "type": "package",
+      "path": "dryioc.dll/5.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "DryIoc.snk",
+        "LICENSE.txt",
+        "dryioc.dll.5.4.1.nupkg.sha512",
+        "dryioc.dll.nuspec",
+        "icon.png",
+        "lib/net45/DryIoc.dll",
+        "lib/net45/DryIoc.xml",
+        "lib/net6.0/DryIoc.dll",
+        "lib/net6.0/DryIoc.xml",
+        "lib/net7.0/DryIoc.dll",
+        "lib/net7.0/DryIoc.xml",
+        "lib/netstandard2.0/DryIoc.dll",
+        "lib/netstandard2.0/DryIoc.xml",
+        "lib/netstandard2.1/DryIoc.dll",
+        "lib/netstandard2.1/DryIoc.xml"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -5679,6 +5712,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "DryIoc.dll >= 5.4.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 5.0.4",
       "Microsoft.AspNetCore.JsonPatch >= 5.0.4",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 5.0.4",
@@ -5727,6 +5761,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "DryIoc.dll": {
+            "target": "Package",
+            "version": "[5.4.1, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[5.0.4, )"

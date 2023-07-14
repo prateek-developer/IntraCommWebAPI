@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "InterCommunicationSystem/1.0.0": {
         "dependencies": {
+          "DryIoc.dll": "5.4.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.4",
           "Microsoft.AspNetCore.JsonPatch": "5.0.4",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "5.0.4",
@@ -327,6 +328,17 @@
         },
         "compile": {
           "InterCommunicationSystem.dll": {}
+        }
+      },
+      "DryIoc.dll/5.4.1": {
+        "runtime": {
+          "lib/netstandard2.1/DryIoc.dll": {
+            "assemblyVersion": "5.4.1.0",
+            "fileVersion": "5.4.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/DryIoc.dll": {}
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -3041,6 +3053,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DryIoc.dll/5.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fWjM3O4tCivhoQiHsJ3XClLtQ8wK2Tg6Loy6bQ7nOO1L5nRngB4G8TjtLJT3JuvnVQ7DC+kD4nDIVR/qjQg/dw==",
+      "path": "dryioc.dll/5.4.1",
+      "hashPath": "dryioc.dll.5.4.1.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

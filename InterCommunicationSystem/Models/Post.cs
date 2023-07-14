@@ -13,7 +13,6 @@ namespace InterCommunicationSystem.Models
         public Post()
         {
             Comments = new HashSet<Comment>();
-            Events = new HashSet<Event>();
         }
 
         [Key]
@@ -28,6 +27,13 @@ namespace InterCommunicationSystem.Models
         [Column(TypeName = "date")]
         public DateTime PostedAt { get; set; }
         public int PostedBy { get; set; }
+        [Required]
+        [Column("Post description", TypeName = "text")]
+        public string PostDescription { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? StartTime { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? EndTime { get; set; }
 
         [ForeignKey(nameof(PostedBy))]
         [InverseProperty(nameof(UserProfile.Posts))]
@@ -37,7 +43,5 @@ namespace InterCommunicationSystem.Models
         public virtual Group PostedOnNavigation { get; set; }
         [InverseProperty(nameof(Comment.Post))]
         public virtual ICollection<Comment> Comments { get; set; }
-        [InverseProperty(nameof(Event.Post))]
-        public virtual ICollection<Event> Events { get; set; }
     }
 }

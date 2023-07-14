@@ -18,7 +18,6 @@ namespace InterCommunicationSystem.Models
         }
 
         public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupInvitesRequest> GroupInvitesRequests { get; set; }
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
@@ -46,25 +45,12 @@ namespace InterCommunicationSystem.Models
                 entity.HasOne(d => d.CommentedByNavigation)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.CommentedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comments_Commented_By");
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comments_PostID");
-            });
-
-            modelBuilder.Entity<Event>(entity =>
-            {
-                entity.Property(e => e.Url).IsUnicode(false);
-
-                entity.HasOne(d => d.Post)
-                    .WithMany(p => p.Events)
-                    .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Events_PostID");
             });
 
             modelBuilder.Entity<Group>(entity =>
@@ -85,13 +71,11 @@ namespace InterCommunicationSystem.Models
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.GroupInvitesRequestCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Group_Invites_Requests_Created_by");
 
                 entity.HasOne(d => d.Group)
                     .WithMany(p => p.GroupInvitesRequests)
                     .HasForeignKey(d => d.GroupId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Group_Invites_Requests_GroupID");
 
                 entity.HasOne(d => d.SentToNavigation)
@@ -103,10 +87,11 @@ namespace InterCommunicationSystem.Models
 
             modelBuilder.Entity<GroupMember>(entity =>
             {
+                entity.Property(e => e.MemberId).ValueGeneratedOnAdd();
+
                 entity.HasOne(d => d.Group)
                     .WithMany()
                     .HasForeignKey(d => d.GroupId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Group_Members_GroupID");
 
                 entity.HasOne(d => d.Member)
@@ -121,7 +106,6 @@ namespace InterCommunicationSystem.Models
                 entity.HasOne(d => d.Post)
                     .WithMany()
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Likes_PostID");
 
                 entity.HasOne(d => d.User)
@@ -133,8 +117,6 @@ namespace InterCommunicationSystem.Models
 
             modelBuilder.Entity<Post>(entity =>
             {
-                entity.Property(e => e.PostId).ValueGeneratedNever();
-
                 entity.Property(e => e.PostType)
                     .IsUnicode(false)
                     .IsFixedLength(true);
