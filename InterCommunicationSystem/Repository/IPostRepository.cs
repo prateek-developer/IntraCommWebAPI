@@ -11,5 +11,8 @@ namespace InterCommunicationSystem.Repository
     {
 
         Task<List<Post>> GetPostAsync(int groupid);
+        Task<PostViewModel> AddNewPost(PostViewModel post);
+
+        Task DeletePostASync(int postid);
     }
 }

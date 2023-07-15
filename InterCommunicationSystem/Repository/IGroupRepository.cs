@@ -19,5 +19,11 @@ namespace InterCommunicationSystem.Repository
         Task UpdateGroupPatch(JsonPatchDocument Group, int groupId);
 
         Task<bool> checkGroupName(string GroupName);
+
+        Task<Boolean> SendInvite_Request(GroupRequestViewModel invite);
+        Task<Boolean> AddGroupMember(GroupMember member);
+
+        Task<Boolean> AcceptInvite(int inviteID);
+
     }
 }

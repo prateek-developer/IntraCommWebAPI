@@ -14,6 +14,7 @@ namespace InterCommunicationSystem.Models
         public Group()
         {
             GroupInvitesRequests = new HashSet<GroupInvitesRequest>();
+            GroupMembers = new HashSet<GroupMember>();
             Posts = new HashSet<Post>();
         }
 
@@ -39,6 +40,8 @@ namespace InterCommunicationSystem.Models
         public virtual UserProfile CreatedByNavigation { get; set; }
         [InverseProperty(nameof(GroupInvitesRequest.Group))]
         public virtual ICollection<GroupInvitesRequest> GroupInvitesRequests { get; set; }
+        [InverseProperty(nameof(GroupMember.Group))]
+        public virtual ICollection<GroupMember> GroupMembers { get; set; }
         [InverseProperty(nameof(Post.PostedOnNavigation))]
         public virtual ICollection<Post> Posts { get; set; }
     }

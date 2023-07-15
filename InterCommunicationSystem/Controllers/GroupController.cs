@@ -1,4 +1,5 @@
-﻿using InterCommunicationSystem.Repository;
+﻿using InterCommunicationSystem.Models;
+using InterCommunicationSystem.Repository;
 using InterCommunicationSystem.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -71,6 +72,38 @@ namespace InterCommunicationSystem.Controllers
             await _groupRepository.UpdateGroupPatch(Group, groupId);
             return Ok();
         }
+
+
+        [HttpPost("add/member/request")]
+        public async Task<IActionResult> AddGroupMembers([FromBody] GroupMember member)
+        {
+            if (member == null) return BadRequest();
+            var isAdded = await _groupRepository.AddGroupMember(member);
+            if (isAdded == true)
+            {
+                return Ok("member added");
+            }
+            else
+            {
+                return Ok("invite sent");
+            }
+        }
+
+        [HttpPost("accept/invitation")]
+        public async Task<IActionResult> AcceptInvite([FromQuery] int inviteId)
+        {
+            var accepted = await _groupRepository.AcceptInvite(inviteId);
+            if (accepted)
+            {
+                return Ok("user accepted invitation");
+            }
+            else
+            {
+                return Ok("user rejected invitation");
+            }
+        }
+
+      
 
     }
 }

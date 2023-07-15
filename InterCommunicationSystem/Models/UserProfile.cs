@@ -18,6 +18,7 @@ namespace InterCommunicationSystem.Models
             Comments = new HashSet<Comment>();
             GroupInvitesRequestCreatedByNavigations = new HashSet<GroupInvitesRequest>();
             GroupInvitesRequestSentToNavigations = new HashSet<GroupInvitesRequest>();
+            GroupMembers = new HashSet<GroupMember>();
             Groups = new HashSet<Group>();
             Posts = new HashSet<Post>();
         }
@@ -69,6 +70,8 @@ namespace InterCommunicationSystem.Models
         public virtual ICollection<GroupInvitesRequest> GroupInvitesRequestCreatedByNavigations { get; set; }
         [InverseProperty(nameof(GroupInvitesRequest.SentToNavigation))]
         public virtual ICollection<GroupInvitesRequest> GroupInvitesRequestSentToNavigations { get; set; }
+        [InverseProperty(nameof(GroupMember.Member))]
+        public virtual ICollection<GroupMember> GroupMembers { get; set; }
         [InverseProperty(nameof(Group.CreatedByNavigation))]
         public virtual ICollection<Group> Groups { get; set; }
         [InverseProperty(nameof(Post.PostedByNavigation))]

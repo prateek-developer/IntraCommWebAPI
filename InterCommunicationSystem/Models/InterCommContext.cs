@@ -66,8 +66,6 @@ namespace InterCommunicationSystem.Models
 
             modelBuilder.Entity<GroupInvitesRequest>(entity =>
             {
-                entity.Property(e => e.InviteId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.GroupInvitesRequestCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
@@ -87,15 +85,13 @@ namespace InterCommunicationSystem.Models
 
             modelBuilder.Entity<GroupMember>(entity =>
             {
-                entity.Property(e => e.MemberId).ValueGeneratedOnAdd();
-
                 entity.HasOne(d => d.Group)
-                    .WithMany()
+                    .WithMany(p => p.GroupMembers)
                     .HasForeignKey(d => d.GroupId)
                     .HasConstraintName("FK_Group_Members_GroupID");
 
                 entity.HasOne(d => d.Member)
-                    .WithMany()
+                    .WithMany(p => p.GroupMembers)
                     .HasForeignKey(d => d.MemberId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Group_Members_MemberID");

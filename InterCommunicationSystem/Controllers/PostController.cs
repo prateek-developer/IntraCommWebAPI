@@ -24,7 +24,7 @@ namespace InterCommunicationSystem.Controllers
 
         [HttpGet("Users")]
 
-        public async Task<IActionResult> GetAllUser(int id)
+        public async Task<IActionResult> GetAllpost(int id)
         {
             var post = await _postRepository.GetPostAsync(id);
             if (post == null)
