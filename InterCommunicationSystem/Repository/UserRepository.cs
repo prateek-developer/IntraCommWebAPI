@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace InterCommunicationSystem.Repository
@@ -19,14 +20,14 @@ namespace InterCommunicationSystem.Repository
         }
 
 
-        public async Task<List<UsrProfileViewModel>> GetAllUserAsync()
+        public async Task<List<UserProfile>> GetAllUserAsync()
         {
 
 
             return await (from u in context.UserProfiles
 
 
-                          select new UsrProfileViewModel
+                          select new UserProfile
                           {
                               FirstName = u.FirstName,
                               LastName = u.LastName,
@@ -48,11 +49,11 @@ namespace InterCommunicationSystem.Repository
         }
 
 
-        public async Task<UsrProfileViewModel> GetUserNameAsync(string Name)
+        public async Task<UserProfile> GetUserNameAsync(string Name)
         {
 
 
-            var records = await context.UserProfiles.Where(u => u.FirstName == Name).Select(u => new UsrProfileViewModel()
+            var records = await context.UserProfiles.Where(u => u.FirstName == Name).Select(u => new UserProfile()
             {
 
 
@@ -60,7 +61,7 @@ namespace InterCommunicationSystem.Repository
                 LastName = u.LastName,
                 Email = u.Email,
                 Contact = u.Contact,
-                Dob = u.Dob,
+                Dob = (System.DateTime)u.Dob,
                 AddressLine1 = u.AddressLine1,
                 AddressLine2 = u.AddressLine2,
                 City = u.City,
@@ -73,14 +74,14 @@ namespace InterCommunicationSystem.Repository
             return records;
         }
 
-        public async Task<UserProfile> AddUSerAsync(UsrProfileViewModel user)
+        public async Task<UserProfiles> AddUSerAsync(UserProfile user)
         {
-            var users = new UserProfile()
+            var users = new UserProfiles()
             {
 
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Email = user.Email,
+                Email = (user.Email),
                 Contact = user.Contact,
                 Dob = (System.DateTime)user.Dob,
 
@@ -142,6 +143,14 @@ namespace InterCommunicationSystem.Repository
                 UserProfile.ApplyTo(record);
                 await context.SaveChangesAsync();
             }
+        }
+
+
+        public async Task<bool> IsValidEmail(string email)
+        {
+            Regex emailRegex = new Regex(@"^([\w\.\-]+)@([\w\w-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase);
+            return emailRegex.IsMatch(email);
+
         }
 
 

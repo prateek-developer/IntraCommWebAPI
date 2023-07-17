@@ -23,7 +23,7 @@ namespace InterCommunicationSystem.Models
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
-        public virtual DbSet<UserProfile> UserProfiles { get; set; }
+        public virtual DbSet<UserProfiles> UserProfiles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -130,7 +130,7 @@ namespace InterCommunicationSystem.Models
                     .HasConstraintName("FK_Posts_Posted_On");
             });
 
-            modelBuilder.Entity<UserProfile>(entity =>
+            modelBuilder.Entity<UserProfiles>(entity =>
             {
                 entity.Property(e => e.AddressLine1).IsUnicode(false);
 

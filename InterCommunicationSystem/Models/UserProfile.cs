@@ -11,9 +11,9 @@ namespace InterCommunicationSystem.Models
     [Table("User_Profile")]
     [Index(nameof(Contact), Name = "UK_User_Profile_Contact", IsUnique = true)]
     [Index(nameof(Email), Name = "UK_User_Profile_Email", IsUnique = true)]
-    public partial class UserProfile
+    public partial class UserProfiles
     {
-        public UserProfile()
+        public UserProfiles()
         {
             Comments = new HashSet<Comment>();
             GroupInvitesRequestCreatedByNavigations = new HashSet<GroupInvitesRequest>();

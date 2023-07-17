@@ -9,6 +9,6 @@ namespace InterCommunicationSystem.Repository
 {
     public interface ILoginRepository
     {
-        Task<UserProfile> Login(UsrProfileViewModel User);
+        Task<UserProfiles> Login(UserProfile User);
     }
 }

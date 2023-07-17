@@ -30,13 +30,13 @@ namespace InterCommunicationSystem.Models
         public DateTime UpdatedAt { get; set; }
 
         [ForeignKey(nameof(CreatedBy))]
-        [InverseProperty(nameof(UserProfile.GroupInvitesRequestCreatedByNavigations))]
-        public virtual UserProfile CreatedByNavigation { get; set; }
+        [InverseProperty(nameof(UserProfiles.GroupInvitesRequestCreatedByNavigations))]
+        public virtual UserProfiles CreatedByNavigation { get; set; }
         [ForeignKey(nameof(GroupId))]
         [InverseProperty("GroupInvitesRequests")]
         public virtual Group Group { get; set; }
         [ForeignKey(nameof(SentTo))]
-        [InverseProperty(nameof(UserProfile.GroupInvitesRequestSentToNavigations))]
-        public virtual UserProfile SentToNavigation { get; set; }
+        [InverseProperty(nameof(UserProfiles.GroupInvitesRequestSentToNavigations))]
+        public virtual UserProfiles SentToNavigation { get; set; }
     }
 }

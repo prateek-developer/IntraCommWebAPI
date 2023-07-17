@@ -1,6 +1,7 @@
 ﻿using InterCommunicationSystem.Models;
 using InterCommunicationSystem.Repository;
 using InterCommunicationSystem.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,51 +20,74 @@ namespace InterCommunicationSystem.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-
+/*
         private readonly ILoginRepository _loginRepository;
-
+*/
+        private readonly IJWTWebAuthentication _jWTWebAuthentication;
+/*
         public LoginController(ILoginRepository LoginRepository)
         {
             _loginRepository = LoginRepository;
         }
-
-
-
-        [HttpPost("authentication")]
-
-        public async Task<IActionResult> LoginUSer([FromBody] UsrProfileViewModel user0bj)
+*/
+        public LoginController(IJWTWebAuthentication jWTWebAuthentication)
         {
-
-
-
-
-            if (user0bj == null)
-            {
-                return BadRequest();
-            }
-
-
-            var user = await _loginRepository.Login(user0bj);
-            if (user == null)
-            {
-                return NotFound("not found");
-            }
-            if (!PasswordHasher.VerifyPassword(user0bj.Password, user.Password))
-            {
-                return BadRequest(new
-                {
-                    message = "Password is incorrect"
-                });
-            }
-
-            return Ok(new
-            {
-             
-                Message = "Login successful"
-            });
+            this._jWTWebAuthentication = jWTWebAuthentication;
         }
 
-    }
+/*
+        [AllowAnonymous]
+        [HttpPost("authentication")]
+
+        public async Task<IActionResult> LoginUSer([FromBody] UserProfile user0bj)
+        {
+
+*/
+
+
+            /* if (user0bj == null)
+             {
+                 return BadRequest();
+             }
+
+
+             var user = await _loginRepository.Login(user0bj);
+             if (user == null)
+             {
+                 return NotFound("not found");
+             }
+             if (!PasswordHasher.VerifyPassword(user0bj.Password, user.Password))
+             {
+                 return BadRequest(new
+                 {
+                     message = "Password is incorrect"
+                 });
+             }
+             var token = _jWTWebAuthentication.authenticate(user0bj);
+
+             if (token == null)
+             {
+                 return Unauthorized();
+             }
+             return Ok(token) ;
+         }*/
+
+            [HttpPost]
+            [Route("authenticate")]
+        public async Task<IActionResult> authenticate([FromBody] LoginViewModel user0bj)
+        {
+                var token = _jWTWebAuthentication.authenticate(user0bj);
+
+                if (token == null)
+                {
+                    return Unauthorized();
+                }
+
+                return Ok(token);
+            }
+
+
+        }
 
 
 

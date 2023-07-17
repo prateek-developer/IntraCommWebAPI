@@ -23,7 +23,7 @@ namespace InterCommunicationSystem.Models
         [InverseProperty("GroupMembers")]
         public virtual Group Group { get; set; }
         [ForeignKey(nameof(MemberId))]
-        [InverseProperty(nameof(UserProfile.GroupMembers))]
-        public virtual UserProfile Member { get; set; }
+        [InverseProperty(nameof(UserProfiles.GroupMembers))]
+        public virtual UserProfiles Member { get; set; }
     }
 }

@@ -11,18 +11,22 @@ namespace InterCommunicationSystem.Repository
     public interface IUserRepository
     {
 
-        Task<List<UsrProfileViewModel>> GetAllUserAsync();
-        Task<UsrProfileViewModel> GetUserNameAsync(string Name);
+        Task<List<UserProfile>> GetAllUserAsync();
+        Task<UserProfile> GetUserNameAsync(string Name);
 
 
-        Task<UserProfile> AddUSerAsync(UsrProfileViewModel user);
+        Task<UserProfiles> AddUSerAsync(UserProfile user);
 
          Task DeleteUserAsync(string email);
 
         Task UpdateUserPatch(JsonPatchDocument UserProfile, string FirstName);
  
             Task<bool> checkUserEmail(string email);
-        
 
-    }
+        Task<bool> IsValidEmail(string email);
+
+
+
+
+        }
 }

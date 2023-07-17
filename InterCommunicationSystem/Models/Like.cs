@@ -18,6 +18,6 @@ namespace InterCommunicationSystem.Models
         [ForeignKey(nameof(PostId))]
         public virtual Post Post { get; set; }
         [ForeignKey(nameof(UserId))]
-        public virtual UserProfile User { get; set; }
+        public virtual UserProfiles User { get; set; }
     }
 }

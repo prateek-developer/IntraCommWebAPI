@@ -35,6 +35,28 @@ namespace InterCommunicationSystem
 
             services.AddDbContext<InterCommContext>(
                options => options.UseSqlServer(Configuration.GetConnectionString("InterCommDB")));
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                var Key = Encoding.UTF8.GetBytes(Configuration["JWT:Key"]);
+                o.SaveToken = true;
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["JWT:Issuer"],
+                    ValidAudience = Configuration["JWT:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Key)
+                };
+            });
+
+            services.AddScoped<IJWTWebAuthentication, JWTWebAuthentication>();
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
@@ -43,26 +65,13 @@ namespace InterCommunicationSystem
 
             services.AddDbContext<InterCommContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DBconnecton")));
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
-            services.AddScoped<IGroupRepository, GroupRepository>();
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("veryverysecret......")),
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                };
-            }
-               );
+            services.AddScoped<IPostRepository, PostRepository>(); services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<ICommonRepository, CommonRepository>();
+            
+
+        
 
         }
 

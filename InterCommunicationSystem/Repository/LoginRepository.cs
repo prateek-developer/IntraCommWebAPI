@@ -25,11 +25,11 @@ namespace InterCommunicationSystem.Repository
 
 
 
-        public async Task<UserProfile> Login(UsrProfileViewModel User)
+        public async Task<UserProfiles> Login(UserProfile User)
         {
-            var user_obj = await _db.UserProfiles.Where(x => x.Email == User.Email).Select(x => new UserProfile()
+            var user_obj = await _db.UserProfiles.Where(x => x.Email == User.Email).Select(x => new UserProfiles()
             {
-                Email=x.Email,
+                Email= x.Email,
                 Password = x.Password,
                
             })
@@ -40,6 +40,8 @@ namespace InterCommunicationSystem.Repository
 
         }
 
+
+    
 
 
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InterCommunicationSystem.Repository
 {
-    public class PostRepository
+    public class PostRepository  :IPostRepository
     {
 
         private readonly InterCommContext context;

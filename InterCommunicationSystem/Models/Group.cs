@@ -36,8 +36,8 @@ namespace InterCommunicationSystem.Models
         public int CreatedBy { get; set; }
 
         [ForeignKey(nameof(CreatedBy))]
-        [InverseProperty(nameof(UserProfile.Groups))]
-        public virtual UserProfile CreatedByNavigation { get; set; }
+        [InverseProperty(nameof(UserProfiles.Groups))]
+        public virtual UserProfiles CreatedByNavigation { get; set; }
         [InverseProperty(nameof(GroupInvitesRequest.Group))]
         public virtual ICollection<GroupInvitesRequest> GroupInvitesRequests { get; set; }
         [InverseProperty(nameof(GroupMember.Group))]

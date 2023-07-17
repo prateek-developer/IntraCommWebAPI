@@ -24,8 +24,8 @@ namespace InterCommunicationSystem.Models
         public DateTime CommentedAt { get; set; }
 
         [ForeignKey(nameof(CommentedBy))]
-        [InverseProperty(nameof(UserProfile.Comments))]
-        public virtual UserProfile CommentedByNavigation { get; set; }
+        [InverseProperty(nameof(UserProfiles.Comments))]
+        public virtual UserProfiles CommentedByNavigation { get; set; }
         [ForeignKey(nameof(PostId))]
         [InverseProperty("Comments")]
         public virtual Post Post { get; set; }

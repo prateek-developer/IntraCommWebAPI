@@ -54,17 +54,20 @@ namespace InterCommunicationSystem.Controllers
         [HttpPost("SignUP")]
 
 
-        public async Task<IActionResult> AddUser([FromBody] UsrProfileViewModel User)
+        public async Task<IActionResult> AddUser([FromBody] UserProfile User)
         {
+            if (await _userRepository.IsValidEmail(User.Email))
+            {
+                if (await _userRepository.checkUserEmail(User.Email))
+                    return BadRequest(new
+                    {
+                        message = "username already exist"
+                    });
+            }
+                var id = await _userRepository.AddUSerAsync(User);
+                return Ok(User);
 
-            if (await _userRepository.checkUserEmail(User.Email))
-                return BadRequest(new
-                {
-                    Message = "username already exist"
-                });
-
-            var id = await _userRepository.AddUSerAsync(User);
-            return Ok(User);
+            
         }
 
 

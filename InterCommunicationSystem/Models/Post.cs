@@ -36,8 +36,8 @@ namespace InterCommunicationSystem.Models
         public DateTime? EndTime { get; set; }
 
         [ForeignKey(nameof(PostedBy))]
-        [InverseProperty(nameof(UserProfile.Posts))]
-        public virtual UserProfile PostedByNavigation { get; set; }
+        [InverseProperty(nameof(UserProfiles.Posts))]
+        public virtual UserProfiles PostedByNavigation { get; set; }
         [ForeignKey(nameof(PostedOn))]
         [InverseProperty(nameof(Group.Posts))]
         public virtual Group PostedOnNavigation { get; set; }

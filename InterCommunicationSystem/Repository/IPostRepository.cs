@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InterCommunicationSystem.Repository
 {
-    public interface IPostRepository
+    public interface IPostRepository 
     {
 
         Task<List<Post>> GetPostAsync(int groupid);

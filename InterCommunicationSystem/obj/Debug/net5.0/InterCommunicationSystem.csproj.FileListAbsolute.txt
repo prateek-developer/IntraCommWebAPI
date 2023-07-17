@@ -64,3 +64,4 @@ C:\Users\Prateek\source\repos\InterCommunicationSystem\InterCommunicationSystem\
 C:\Users\Prateek\source\repos\InterCommunicationSystem\InterCommunicationSystem\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\Prateek\source\repos\InterCommunicationSystem\InterCommunicationSystem\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Users\Prateek\source\repos\InterCommunicationSystem\InterCommunicationSystem\bin\Debug\net5.0\DryIoc.dll
+C:\Users\Prateek\source\repos\InterCommunicationSystem\InterCommunicationSystem\bin\Debug\net5.0\Microsoft.IdentityModel.Abstractions.dll
